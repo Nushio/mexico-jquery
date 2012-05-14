@@ -36,20 +36,13 @@ var state_names = ['Aguascalientes','Baja California Norte','Baja California Sur
 $(function() {
 	$('.map').maphilight({fade: false});
 });
-/** Internet Explorer indexOf hack */
-if(!Array.indexOf){
-    Array.prototype.indexOf = function(obj){
-        for(var i=0; i<this.length; i++){
-            if(this[i]==obj){
-                return i;
-            }
-        }
-        return -1;
-    }
-}
-/** End of Internet Explorer indexOf hack */
-$('.area').mouseover(function() {
-    $('#edo').html(state_names[states.indexOf($(this).attr('id'))]);
+$(document).ready(function() {
+$('.area').hover(function() {
+var id= $(this).attr('id');
+var state = $.inArray(id,states);
+
+$('#edo').html(state_names[state]);
+});
 });
 </script>
 </head>
@@ -90,7 +83,7 @@ $('.area').mouseover(function() {
 </map>
 <div id='content_mapa'>
 <div id="edo" style="color: red;z-index: 2;position: absolute;margin-top: 20px;margin-left: 350px;font-size: 2em;"></div>
-<-- For a copy of an unedited Map of Mexico in SVG Format, please check https://commons.wikimedia.org/wiki/File:Blank_map_of_Mexico.svg -->
+<!-- For a copy of an unedited Map of Mexico in SVG Format, please check https://commons.wikimedia.org/wiki/File:Blank_map_of_Mexico.svg -->
 <img class="map" src="images/mx_map.png" usemap="#mexico" title="Mexico" alt="Mexico" />
 </div>
 </body>
